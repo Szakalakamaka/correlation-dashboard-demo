@@ -32,6 +32,35 @@ Splunk is used for centralized logging and monitoring of transactions. The `splu
 6. **(Optional) Use SSL Certificates for Secure Communication**:
    - If you're using secure communication, ensure that you have placed the required certificates in the `splunk/certificates/` directory.
 
+
+### How to set up Correlation Dashboard Demo
+
+1. Login to Splunk under http://localhost:8000. Username: admin, Password: adminadmin1
+2. Install Network Diagram Viz.
+
+On the main board choose "Find more apps". Search for Network Diagram Viz and continue with default installation.
+
+3. Load fake data.
+
+The data that you can find under splunk/mockdata.csv is loaded to the Splunk's containter. However it has to be manually loaded to the application itself. In order to achieve that:
+
+On the right top corner choose Settings >> DATA >> Data Inputs >> File & Directories >> New Local File & Directory
+
+In the "File or Directory" input choose the mockdata from the path /data/mockdata.csv and submit the data with default options.
+
+Now you will able to search that data with the search queries like:
+
+source="/data/mockdata.csv" host="993627bb7161" sourcetype="csv"
+
+4. Create the CorrelationId Tracking Dashboard
+
+Go to Search and Report >> Dashboards >> Create New Dashboard
+
+Copy and paste code from the dashoard.yaml file. Choose Classic Dashboard. Later:
+
+Edit Dashboard >> Source >> Paste the code
+
+
 ---
 
 ### Troubleshooting
