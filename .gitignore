@@ -1,0 +1,55 @@
+# Java (Maven)
+### Ignore Maven build output
+target/
+
+# Ignore IntelliJ IDEA project files
+.idea/
+
+# Ignore Eclipse project files
+.project
+.classpath
+.settings/
+
+# Node.js
+### Ignore node_modules and build artifacts
+data-flow-frontend/node_modules/
+data-flow-frontend/dist/
+data-flow-frontend/build/
+
+# Ignore package lock and npm debug files
+data-flow-frontend/package-lock.json
+data-flow-frontend/npm-debug.log
+
+# Docker
+### Ignore Docker build cache
+**/Dockerfile.*
+
+# Ignore Docker Compose override file
+docker-compose.override.yml
+
+# Temporary files
+*.log
+*.tmp
+temp.txt
+
+# OS-specific files
+### macOS
+.DS_Store
+
+### Windows
+Thumbs.db
+ehthumbs.db
+
+# IDE/Editor files
+### VS Code
+.vscode/
+
+### JetBrains IDEs
+*.iml
+
+# Application specific config files
+*.env
+
+# Other sensitive or auto-generated files
+*.swp
+*.swo

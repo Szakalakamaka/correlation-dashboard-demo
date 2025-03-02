@@ -1,0 +1,87 @@
+<form version="1.1" theme="dark">
+  <label>Correlation Id Tracking Dashboard</label>
+  <fieldset submitButton="false">
+    <input type="text" token="correlationId">
+      <label>CorrelationId</label>
+      <default>d4e1a3bc-1e2f-4a97-b75c-44d29b72a8b5</default>
+      <initialValue>d4e1a3bc-1e2f-4a97-b75c-44d29b72a8b5</initialValue>
+    </input>
+    <input type="time" token="field1">
+      <label></label>
+      <default>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <title>Correlation Id Tracking Dashboard</title>
+      <viz type="network-diagram-viz.network-diagram-viz">
+        <search>
+          <query>$correlationId$
+| rex field=_raw "application\s*=\s*(?&lt;application&gt;[^\s]+)"
+| rex field=_raw "correlationId\s*=\s*(?&lt;correlationId&gt;[^\s]+)"
+| table _time correlationId application
+| sort correlationId _time
+| streamstats current=f last(application) as from by correlationId
+| rename application as to
+| where from != to OR isnull(from)
+| table correlationId _time from to</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="network-diagram-viz.network-diagram-viz.arrowLocation">none</option>
+        <option name="network-diagram-viz.network-diagram-viz.canZoom">true</option>
+        <option name="network-diagram-viz.network-diagram-viz.clusterBy">none</option>
+        <option name="network-diagram-viz.network-diagram-viz.defaultLinkLength">100</option>
+        <option name="network-diagram-viz.network-diagram-viz.defaultNodeType">circle</option>
+        <option name="network-diagram-viz.network-diagram-viz.draggableNodes">true</option>
+        <option name="network-diagram-viz.network-diagram-viz.drilldownClick">singleOrDouble</option>
+        <option name="network-diagram-viz.network-diagram-viz.enablePhysics">true</option>
+        <option name="network-diagram-viz.network-diagram-viz.hierarchy">false</option>
+        <option name="network-diagram-viz.network-diagram-viz.hierarchyDirection">Top-Down</option>
+        <option name="network-diagram-viz.network-diagram-viz.hierarchySortMethod">directed</option>
+        <option name="network-diagram-viz.network-diagram-viz.levelSeparation">150</option>
+        <option name="network-diagram-viz.network-diagram-viz.linkTextLocation">bottom</option>
+        <option name="network-diagram-viz.network-diagram-viz.linkTextSize">medium</option>
+        <option name="network-diagram-viz.network-diagram-viz.missingImageURL">/static/app/network-diagram-viz/customimages/404.gif</option>
+        <option name="network-diagram-viz.network-diagram-viz.nodeSpacing">100</option>
+        <option name="network-diagram-viz.network-diagram-viz.nodeTextSize">medium</option>
+        <option name="network-diagram-viz.network-diagram-viz.physicsModel">forceAtlas2Based</option>
+        <option name="network-diagram-viz.network-diagram-viz.shakeTowards">roots</option>
+        <option name="network-diagram-viz.network-diagram-viz.smoothEdgeType">dynamic</option>
+        <option name="network-diagram-viz.network-diagram-viz.smoothEdges">true</option>
+        <option name="network-diagram-viz.network-diagram-viz.tokenNode">nd_node_token</option>
+        <option name="network-diagram-viz.network-diagram-viz.tokenToNode">nd_to_node_token</option>
+        <option name="network-diagram-viz.network-diagram-viz.tokenToolTip">nd_tooltip_token</option>
+        <option name="network-diagram-viz.network-diagram-viz.tokenValue">nd_value_token</option>
+        <option name="network-diagram-viz.network-diagram-viz.wrapNodeText">true</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </viz>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <search>
+          <query>$correlationId$
+| rex field=_raw "application\s*=\s*(?&lt;application&gt;[^\s]+)"
+| rex field=_raw "correlationId\s*=\s*(?&lt;correlationId&gt;[^\s]+)"
+| table _time correlationId application
+| sort correlationId _time
+| streamstats current=f last(application) as from by correlationId
+| rename application as to
+| where from != to OR isnull(from)
+| table correlationId _time from to</query>
+          <earliest>0</earliest>
+          <latest></latest>
+        </search>
+        <option name="drilldown">none</option>
+      </table>
+    </panel>
+  </row>
+</form>
