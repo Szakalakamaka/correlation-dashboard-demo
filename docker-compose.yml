@@ -3,7 +3,7 @@ services:
     image: splunk/splunk:9.3.1
     container_name: splunk
     environment:
-      - SPLUNK_PASSWORD=${SPLUNK_PASSWORD:-changeme}
+      - SPLUNK_PASSWORD=adminadmin1
       - SPLUNK_START_ARGS=--accept-license
     ports:
       - 8000:8000   # Splunk Web (HTTPS)
